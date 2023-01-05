@@ -1,23 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function App() {
+
+  const [name, setName] = useState('')
+  const [rollNumber, setRollNumber] = useState('')
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setName('');
+    setRollNumber('');
+    console.log(name, rollNumber)
+    localStorage.setItem(`${rollNumber}`, `${name}` );
+    navigate('/home');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="">
+      <form 
+      >
+        <input
+          type='text'
+          placeholder="Name"
+          value={name}
+          onChange={(e) => {setName(e.target.value)}}
         >
-          Learn React
-        </a>
-      </header>
+        
+        </input>
+        <input
+          type='number'
+          placeholder="Roll Number"
+          value={rollNumber}
+          onChange={(e) => {setRollNumber(e.target.value)}}
+        >
+        
+        </input>
+        <input type='submit'value='CHECK IN' onClick={handleSubmit} >
+          
+        </input>
+      </form>
+      
     </div>
   );
 }
